@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import Draggable from "react-draggable";
 import Context from "./Context";
 import GetIcon from "./Icons";
 
@@ -9,9 +8,6 @@ class NewCanvas extends Component {
 
   constructor() {
     super();
-    this.state = {
-      minimaze: false,
-    };
     this.getOptions = this.getOptions.bind(this);
     this.getInput = this.getInput.bind(this);
   }
@@ -36,21 +32,12 @@ class NewCanvas extends Component {
         type={type}
         value={value}
         placeholder={placeholder}
-        onChange={(e) => func(id, e.target.value )}
+        onChange={(e) => func(id, e.target.value)}
       />
     );
   }
 
   render() {
-    const { minimaze } = this.state;
-    if (minimaze)
-      return (
-        <Draggable onTouch={() => this.setState({ minimaze: !minimaze })}>
-          <div className="minimazed-upper-bar">
-            <GetIcon name="arrowsExpandIcon" className="minimaze-icon" />
-          </div>
-        </Draggable>
-      );
     return (
       <Context.Consumer>
         {({
@@ -63,20 +50,13 @@ class NewCanvas extends Component {
           return (
             <form className="new-canvas-container">
               <div className="upper-bar">
-                <div onClick={() => this.setState({ minimaze: !minimaze })}>
-                  <GetIcon
-                    name="arrowsCollapseIcon"
-                    className="minimaze-icon"
-                  />
-                </div>
+                <label
+                  htmlFor="title-input"
+                  onClick={() => setCanvas("title", "")}
+                >
+                  {this.getInput("title", title, "________", "text", setCanvas)}
+                </label>
               </div>
-
-              <label
-                htmlFor="title-input"
-                onClick={() => setCanvas("title", "")}
-              >
-                {this.getInput("title", title, "________", "text", setCanvas)}
-              </label>
 
               <div className="dimension-input-container">
                 <div>
@@ -96,7 +76,13 @@ class NewCanvas extends Component {
                     </button>
                     <label htmlFor="height-input">
                       Height:
-                      {this.getInput("height", height, "0", "number", setCanvas)}
+                      {this.getInput(
+                        "height",
+                        height,
+                        "0",
+                        "number",
+                        setCanvas
+                      )}
                     </label>
                   </div>
                 </div>
@@ -111,6 +97,7 @@ class NewCanvas extends Component {
                     setPredefined(dimension[0], dimension[1]);
                   }}
                 >
+                  <option hidden>Select...</option>
                   {this.getOptions(["16x16", "32x32", "64x64", "120x120"])}
                 </select>
               </label>

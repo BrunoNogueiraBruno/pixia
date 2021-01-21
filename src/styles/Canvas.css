@@ -1,0 +1,65 @@
+.canvas-header {
+  align-items: center;
+  background-color: rgb(39, 39, 39);
+  color: white;
+  display: flex;
+  height: 5vh;
+  justify-content: center;
+  width: 100vw;
+}
+
+.canvas-container {
+  background-color: rgb(61, 61, 61);
+  height: 95vh;
+}
+
+.canvas-content {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  height: 75vh;
+  flex-direction: column;
+  overflow: auto;
+  width: 100vw;
+}
+
+.canvas {
+  display: table;
+  box-sizing: content-box;
+  height: 70vh;
+  width: auto;
+}
+
+.canvas-row {
+  display: flex;
+}
+
+.pixel {
+  height: 20px;
+  width: 20px;
+}
+
+.zoom {
+  align-items: center;
+  background-color: rgb(255, 255, 255);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  height: 60px;
+  width: 60px;
+}
+
+.tool-bar {
+  align-items: center;
+  background-color: rgb(39, 39, 39);
+  display: flex;
+  justify-content: center;
+  height: 20vh;
+  width: 100vw;
+}
+
+.zoom-range {
+  color: white;
+  text-align: center;
+  width: 80vw;
+}

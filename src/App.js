@@ -2,7 +2,7 @@ import { BrowserRouter, Route } from "react-router-dom";
 import React from "react";
 import "./App.css";
 import Home from "./pages/Home";
-import Canvas from "./pages/Canvas";
+import CanvasPage from "./pages/CanvasPage";
 import Context from "./components/Context";
 
 class App extends React.Component {
@@ -10,13 +10,18 @@ class App extends React.Component {
     super();
     this.state = {
       canvas: {
-        title: "undefined",
-        width: "",
-        height: "",
-      }
+        title: "untitled",
+        width: undefined,
+        height: undefined,
+      },
+      interface: {
+        zoom: 20,
+        selectedColor: "black",
+      },
     };
     this.setCanvas = this.setCanvas.bind(this);
     this.setPredefined = this.setPredefined.bind(this);
+    this.setInterface = this.setInterface.bind(this);
   }
 
   setCanvas(key, value) {
@@ -27,17 +32,22 @@ class App extends React.Component {
     this.setState({ ...this.state, canvas: { ...this.state.canvas, width, height } });
   }
 
+  setInterface(key, value) {
+    this.setState({ ...this.state, interface: { ...this.state.interface, [key]: value } });
+  }
+
   render() {
     const value = {
       state: this.state,
       setCanvas: this.setCanvas,
       setPredefined: this.setPredefined,
+      setInterface: this.setInterface,
     }
     return (
       <Context.Provider value={value}>
         <BrowserRouter>
           <Route exact path={"/"} component={Home} />
-          <Route exact path={"/canvas"} component={Canvas} />
+          <Route exact path={"/canvas"} component={CanvasPage} />
         </BrowserRouter>
       </Context.Provider>
     );
